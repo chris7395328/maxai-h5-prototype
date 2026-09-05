@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#fff0e3" />
+  <title>MaxAi · 首页</title>
+  <style>
+    :root { --orange:#ff7201; --ink:#161311; --cream:#fff9f3; --paper:#fffdfb; --line:#efddd0; --muted:#8f837a; }
+    * { box-sizing:border-box; }
+    html { background:#fff9f3; }
+    body { margin:0; min-width:320px; background:#fff9f3; color:var(--ink); font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; }
+    button,a { -webkit-tap-highlight-color:transparent; font:inherit; }
+    button { border:0; cursor:pointer; }
+    .app { width:min(100%, 430px); min-height:100dvh; margin:0 auto; background:var(--cream); overflow:hidden; }
+    .header { height:calc(72px + env(safe-area-inset-top)); padding:env(safe-area-inset-top) 20px 0; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; align-items:center; gap:9px; min-width:0; color:var(--ink); text-decoration:none; }
+    .brand img { display:block; width:40px; height:40px; object-fit:contain; }
+    .brand-name { font-family:"Arial Black","PingFang SC","Microsoft YaHei",sans-serif; font-size:27px; font-weight:900; line-height:1; letter-spacing:-1.4px; }
+    .quick-actions { display:flex; align-items:center; gap:8px; }
+    .quick-action { width:42px; height:42px; display:grid; place-items:center; border-radius:14px; color:var(--orange); background:rgba(255,255,255,.58); border:1px solid #ffd2ae; }
+    .quick-action svg { width:21px; height:21px; }
+    .quick-action:focus-visible,.nav-link:focus-visible,.hero-cta:focus-visible,.tag:focus-visible,.more:focus-visible,.template-card:focus-visible { outline:3px solid var(--orange); outline-offset:2px; }
+    main { padding:12px 20px calc(98px + env(safe-area-inset-bottom)); }
+    .hero { position:relative; aspect-ratio:3 / 2; overflow:hidden; border-radius:24px; background:#1d120c; isolation:isolate; }
+    .hero::after { content:""; position:absolute; z-index:3; inset:0; background:linear-gradient(180deg,rgba(20,10,2,.02) 17%,rgba(15,9,5,.05) 46%,rgba(15,9,5,.95) 100%); pointer-events:none; }
+    .carousel { position:absolute; inset:0; overflow:hidden; background:radial-gradient(circle at 50% 10%,#3a2619 0%,#1d120c 68%); }
+    .hero-panel { position:absolute; z-index:1; top:8%; width:33%; height:76%; margin:0; overflow:hidden; border-radius:20px; background:#4d3728; box-shadow:0 6px 18px rgba(0,0,0,.28); transition:left .68s cubic-bezier(.2,.72,.2,1),width .68s cubic-bezier(.2,.72,.2,1),height .68s cubic-bezier(.2,.72,.2,1),top .68s cubic-bezier(.2,.72,.2,1); }
+    .hero-panel img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .35s ease; }
+    .hero-panel.role-left { left:-1%; clip-path:polygon(0 0,100% 13%,100% 87%,0 100%); transform:none; }
+    .hero-panel.role-left img { transform:scale(1.06); }
+    .hero-panel.role-center { z-index:2; top:11%; left:36.5%; width:27%; height:72%; transform:none; }
+    .hero-panel.role-center img { transform:scale(1.06); }
+    .hero-panel.role-right { left:68%; clip-path:polygon(0 13%,100% 0,100% 100%,0 87%); transform:none; }
+    .hero-panel.role-right img { transform:scale(1.06); }
+    .hero-panel.role-stash { left:102%; clip-path:polygon(0 13%,100% 0,100% 100%,0 87%); transform:none; }
+    .hero-panel.role-stash img { transform:scale(1.06); }
+    .carousel.is-sliding .hero-panel.role-left { left:-35%; }
+    .carousel.is-sliding .hero-panel.role-center { top:8%; left:-1%; width:33%; height:76%; transform:none; }
+    .carousel.is-sliding .hero-panel.role-right { top:11%; left:36.5%; width:27%; height:72%; transform:none; }
+    .carousel.is-sliding .hero-panel.role-stash { left:68%; }
+    .carousel.no-motion .hero-panel { transition:none; }
+    .hero-copy { position:absolute; z-index:4; left:18px; right:18px; bottom:17px; color:#fff; }
+    .hero-copy [contenteditable] { outline:none; cursor:text; }
+    .hero-kicker { display:inline-flex; padding:5px 9px; margin-bottom:7px; border-radius:999px; background:rgba(10,8,6,.44); backdrop-filter:blur(8px); font-size:10px; font-weight:700; }
+    .hero h1 { width:55%; margin:0; font-size:27px; line-height:1.08; letter-spacing:-1.2px; }
+    .hero p { width:57%; margin:5px 0 0; font-size:11px; color:rgba(255,255,255,.8); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hero-cta { position:absolute; z-index:5; right:15px; bottom:19px; min-height:36px; padding:0 12px 0 14px; display:inline-flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,.88); border-radius:999px; color:white; background:rgba(10,7,4,.32); text-decoration:none; font-size:12px; font-weight:700; backdrop-filter:blur(8px); }
+    .hero-cta svg { width:14px; height:14px; }
+    .carousel-dots { position:absolute; z-index:5; top:16px; right:17px; display:flex; gap:5px; }
+    .carousel-dot { width:5px; height:5px; padding:0; border-radius:50%; background:rgba(255,255,255,.52); transition:width .2s ease,background .2s ease; }
+    .carousel-dot.active { width:16px; border-radius:4px; background:var(--orange); }
+    .template-tags { display:grid; grid-template-columns:1fr 1fr; margin:18px 0 2px; border-bottom:1px solid var(--line); }
+    .tag { position:relative; display:grid; height:48px; place-items:center; background:none; color:#9d9188; font-size:16px; text-decoration:none; }
+    .tag.active { color:var(--ink); font-weight:800; }
+    .tag.active::after { content:""; position:absolute; bottom:-1px; left:50%; width:66px; height:3px; transform:translateX(-50%); border-radius:3px 3px 0 0; background:var(--orange); }
+    .section { padding-top:24px; }
+    .section-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+    .section-title { margin:0; font-size:16px; font-weight:400; letter-spacing:0; line-height:1.4; }
+    .more { padding:6px 10px; border-radius:11px; border:1px solid #ecdcd0; color:#9c9087; background:rgba(255,255,255,.52); text-decoration:none; font-size:11px; white-space:nowrap; }
+    .template-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .template-card { position:relative; min-width:0; aspect-ratio:.72; overflow:hidden; border-radius:15px; text-decoration:none; color:white; background-image:url("assets/reference-home.jpg"); background-size:402px auto; box-shadow:inset 0 -42px 32px rgba(0,0,0,.62); }
+    .template-card::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 53%,rgba(0,0,0,.74)); }
+    .template-card span { position:absolute; z-index:1; left:9px; right:8px; bottom:9px; overflow:hidden; color:#fff; font-size:12px; font-weight:800; line-height:1.15; text-overflow:ellipsis; white-space:nowrap; }
+    .media-0 { background-position:-16px -509px; } .media-1 { background-position:-142px -509px; } .media-2 { background-position:-270px -509px; }
+    .media-3 { background-position:-16px -112px; } .media-4 { background-position:-142px -112px; } .media-5 { background-position:-270px -112px; }
+    .bottom-nav { position:fixed; z-index:20; left:50%; bottom:0; width:min(100%,430px); transform:translateX(-50%); height:calc(64px + env(safe-area-inset-bottom)); display:grid; grid-template-columns:repeat(4,1fr); padding:5px 12px env(safe-area-inset-bottom); border-top:1px solid #efdcd0; background:rgba(255,250,245,.94); box-shadow:0 -8px 20px rgba(112,67,28,.08); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); }
+    .nav-link { min-height:51px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; color:#8e847d; text-decoration:none; font-size:11px; font-weight:500; }
+    .nav-link svg { width:27px; height:27px; overflow:visible; }
+    .nav-link.active { color:var(--orange); font-weight:600; }
+    .nav-link .nav-surface { fill:none; stroke:currentColor; }
+    .nav-link .nav-glyph { fill:none; stroke:currentColor; }
+    .nav-link.active .nav-surface { fill:var(--orange); stroke:var(--orange); }
+    .nav-link.active .nav-glyph { stroke:#fff; }
+    .nav-link.active .nav-glyph-fill { fill:#fff; stroke:none; }
+    @media (prefers-reduced-motion:reduce) { .hero-panel,.hero-panel img,.carousel-dot { transition:none; } }
+    .toast { position:fixed; z-index:30; left:50%; bottom:calc(78px + env(safe-area-inset-bottom)); transform:translate(-50%,16px); opacity:0; pointer-events:none; padding:9px 13px; border-radius:999px; color:#fff; background:rgba(23,17,13,.82); font-size:12px; transition:.2s ease; white-space:nowrap; }
+    .toast.show { transform:translate(-50%,0); opacity:1; }
+    @media (min-width:431px) { .app { box-shadow:0 0 0 1px rgba(160,104,58,.09),0 18px 55px rgba(73,42,16,.15); } }
+  </style>
+  <style>
+    /* iPhone 17 portrait prototype canvas: 402 × 874 CSS px */
+    .app{width:min(100%,402px);height:874px;min-height:874px;display:flex;flex-direction:column;overflow:hidden}.header{height:calc(84px + env(safe-area-inset-top));padding:calc(12px + env(safe-area-inset-top)) 20px 0}.app>main{flex:1 1 auto;min-height:0;overflow-y:auto;scrollbar-width:none;padding-bottom:24px}.app>main::-webkit-scrollbar{display:none}.bottom-nav{position:relative;bottom:auto;left:auto;width:100%;height:calc(76px + env(safe-area-inset-bottom));padding:8px 14px calc(13px + env(safe-area-inset-bottom));flex:0 0 auto;transform:none}
+  </style>
+  <style>.bottom-nav{height:calc(68px + env(safe-area-inset-bottom));padding:6px 16px calc(7px + env(safe-area-inset-bottom));align-items:center;justify-items:center}.nav-link{width:100%;min-height:51px}.brand{gap:6px}.brand img{width:22px;height:22px}.brand-name{font-size:22px;line-height:22px;letter-spacing:-1.05px}.quick-actions{position:relative;gap:4px}.quick-action{width:30px;height:30px;border-radius:10px}.quick-action svg{width:15px;height:15px}.language-button{font-size:9px;font-weight:800;letter-spacing:0}.language-menu{position:absolute;z-index:20;top:36px;left:0;display:grid;gap:3px;width:30px;padding:3px;border:1px solid #f1d9c6;border-radius:10px;background:rgba(255,253,251,.98);box-shadow:0 9px 19px rgba(119,70,29,.13)}.language-menu[hidden]{display:none}.language-menu button{height:24px;border-radius:7px;background:#fff2e7;color:#ad560f;font-size:9px;font-weight:800}.language-menu button:hover{background:var(--orange);color:#fff}.hero-clip-defs{position:absolute;width:0;height:0;overflow:hidden}</style>
+  <style>
+    /* 统一圆角：Banner 12px 为最大常规圆角。 */
+    .hero{border-radius:12px}.hero-panel{border-radius:10px}.template-card{border-radius:8px}.quick-action,.language-menu{border-radius:5px}.language-menu button{border-radius:4px}.more{border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="app" aria-label="MaxAi 首页">
+    <header class="header">
+      <a class="brand" href="home-v1.html" aria-label="MaxAi 首页"><img src="assets/maxai-logo.svg" alt="" /><span class="brand-name">MaxAi</span></a>
+      <nav class="quick-actions" aria-label="快捷入口">
+        <button class="quick-action language-button" id="languageButton" type="button" aria-label="切换语言" aria-expanded="false">ZH</button>
+        <div class="language-menu" id="languageMenu" hidden><button data-language="ZH">ZH</button><button data-language="EN">EN</button><button data-language="ID">ID</button></div>
+        <button class="quick-action" type="button" data-toast="今日积分已领取" aria-label="每日领取积分"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 9.5h15v10h-15zM3.5 6.5h17v3h-17zM12 6.5v13"/><path d="M12 6.5H8.2a2.2 2.2 0 1 1 2.05-3c.58 1.1 1.75 3 1.75 3Zm0 0h3.8a2.2 2.2 0 1 0-2.05-3c-.58 1.1-1.75 3-1.75 3Z"/></svg></button><button class="quick-action" type="button" data-toast="打开 TikTok" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M14.7 3.1h2.75c.2 1.55 1.12 2.65 2.75 3.18v2.81a7.1 7.1 0 0 1-2.7-.73v5.91a5.41 5.41 0 1 1-4.67-5.36v2.86a2.58 2.58 0 1 0 1.87 2.5V3.1Z"/></svg></button><button class="quick-action" type="button" data-toast="打开 Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3.7" y="3.7" width="16.6" height="16.6" rx="5"/><circle cx="12" cy="12" r="3.65"/><circle cx="17.45" cy="6.65" r="1.05" fill="currentColor" stroke="none"/></svg></button>
+      </nav>
+    </header>
+    <main><section class="hero"><div class="carousel"><figure class="hero-panel role-left" data-template="perfume"><img src="assets/hero-perfume-v1.png" alt=""></figure><figure class="hero-panel role-center" data-template="serum"><img src="assets/hero-serum-v1.png" alt=""></figure><figure class="hero-panel role-right" data-template="sunglasses"><img src="assets/hero-sunglasses-v1.png" alt=""></figure><figure class="hero-panel role-stash" data-template="luxury"><img src="assets/hero-perfume-v1.png" alt=""></figure></div><div class="carousel-dots"><button class="carousel-dot"></button><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div><div class="hero-copy"><span class="hero-kicker" contenteditable="true">AI 电商视频</span><h1 contenteditable="true">一键电商视频</h1><p contenteditable="true">让商品视觉快速成为高质感内容</p></div><a class="hero-cta" id="heroCta" href="../template-detail-v1/template-detail-v1.html?template=serum">一键制作</a></section><div class="template-tags"><button class="tag active" data-mode="video" aria-selected="true">视频模板</button><button class="tag" data-mode="image" aria-selected="false">图片模板</button></div><div id="sections"></div></main>
+    <nav class="bottom-nav" aria-label="主导航"><a class="nav-link active" href="home-v1.html" aria-current="page"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="4.2" width="21" height="20" rx="6.3"/><path class="nav-glyph" d="M8.5 17.7v-7.1l5.5 4.5 5.5-4.5v7.1"/></svg><span>首页</span></a><a class="nav-link" href="../create-v1/create-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><path class="nav-glyph" d="M14 7.4c.55 3.8 2.35 5.6 6.2 6.2-3.85.6-5.65 2.4-6.2 6.2-.55-3.8-2.35-5.6-6.2-6.2 3.85-.6 5.65-2.4 6.2-6.2Z"/></svg><span>创作</span></a><a class="nav-link" href="../assets-v1/assets-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><path class="nav-glyph" d="M8.25 10.25h11.5v8H8.25zM10.2 10.25V8.8h4.95l1.4 1.45M11.1 13.1h5.8M11.1 15.55h3.5"/></svg><span>资产</span></a><a class="nav-link" href="../mine-v1/mine-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><circle class="nav-glyph" cx="14" cy="10" r="3.05"/><path class="nav-glyph" d="M8.35 20.05c.48-3.25 2.35-4.9 5.65-4.9s5.17 1.65 5.65 4.9"/></svg><span>我的</span></a></nav>
+    <div class="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script>
+    const catalog={video:[['热门推荐','新品视觉大片|质感细节特写|品牌氛围展示|橱窗上新|热点卖点|广告封面'],['美肤电商','精华新品上新|粉底柔焦特写|香氛氛围短片|面霜质感大片|口红高光时刻|美妆礼盒展示'],['食品饮料','果汁冰感瞬间|咖啡拉花特写|甜品治愈镜头|零食开箱大片|餐桌烟火氛围|饮品新品广告'],['服饰穿搭','通勤穿搭展示|街头风格大片|面料细节特写|包袋出街镜头|鞋履质感广告|衣橱焕新短片'],['家居生活','空间氛围短片|香薰日常镜头|家具细节展示|收纳焕新记录|餐厨好物种草|居家光影大片']],image:[['热门推荐','新品主图设计|视觉海报创作|品牌氛围KV|场景化产品图|高级质感大片|社媒封面设计'],['美肤电商','美妆产品海报|护肤套装KV|香水视觉主图|口红色彩大片|美容仪展示图|礼盒创意封面'],['食品饮料','饮品新品主图|甜品种草海报|食品包装KV|餐饮氛围图|零食详情页图|节日礼盒设计'],['服饰穿搭','穿搭视觉海报|包袋详情主图|鞋履风格KV|服装上新封面|配饰创意主图|品牌Lookbook'],['家居生活','家居空间主图|香薰氛围海报|家具详情KV|厨具产品图|收纳种草封面|生活方式主图']]};
+    function render(mode){const templateKeys=mode==='video'?['perfume','serum','luxury']:['sunglasses','holiday','sunglasses'];document.querySelector('#sections').innerHTML=catalog[mode].map(([title,labels],index)=>{const cards=labels.split('|').map((label,i)=>`<a class="template-card media-${(i+index)%6}" href="../template-detail-v1/template-detail-v1.html?template=${templateKeys[(i+index)%templateKeys.length]}" aria-label="${label}"><span>${label}</span></a>`).join('');return `<section class="section"><div class="section-heading"><h2 class="section-title">${title}</h2><a class="more" href="../templates-v1/templates-v1.html">查看更多</a></div><div class="template-grid">${cards}</div></section>`;}).join('');}
+    render('video');
+    document.querySelectorAll('.tag').forEach(tag=>tag.addEventListener('click',()=>{document.querySelectorAll('.tag').forEach(item=>{item.classList.toggle('active',item===tag);item.setAttribute('aria-selected',item===tag?'true':'false');});render(tag.dataset.mode);}));
+    const toast=document.querySelector('.toast');let toastTimer;
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1800);}
+    document.addEventListener('click',event=>{const target=event.target.closest('[data-toast],[data-route]');if(!target)return;if(target.dataset.route){event.preventDefault();location.href=target.dataset.route==='assets'?'../assets-v1/assets-v1.html':'../mine-v1/mine-v1.html';}else{showToast(target.dataset.toast);}});
+    const languageButton=document.querySelector('#languageButton'),languageMenu=document.querySelector('#languageMenu');languageButton.addEventListener('click',event=>{event.stopPropagation();const open=languageMenu.hidden;languageMenu.hidden=!open;languageButton.setAttribute('aria-expanded',String(open));});languageMenu.addEventListener('click',event=>{const option=event.target.closest('[data-language]');if(!option)return;languageButton.textContent=option.dataset.language;languageMenu.hidden=true;languageButton.setAttribute('aria-expanded','false');showToast(`语言已切换为 ${option.dataset.language}`)});document.addEventListener('click',event=>{if(!event.target.closest('.quick-actions')){languageMenu.hidden=true;languageButton.setAttribute('aria-expanded','false')}});
+    const carousel=document.querySelector('.carousel'),heroPanels=[...document.querySelectorAll('.hero-panel')];
+    const heroItems=[{template:'perfume',src:'assets/hero-perfume-v1.png'},{template:'serum',src:'assets/hero-serum-v1.png'},{template:'sunglasses',src:'assets/hero-sunglasses-v1.png'},{template:'luxury',src:'assets/hero-perfume-v1.png'}];
+    const heroDots=[...document.querySelectorAll('.carousel-dot')];
+    let heroCenterIndex=1,heroMoving=false;
+    function updateHeroMeta(){const center=heroPanels.find(panel=>panel.classList.contains('role-center'));const key=center.dataset.template;document.querySelector('#heroCta').href=`../template-detail-v1/template-detail-v1.html?template=${key}`;heroDots.forEach((dot,index)=>{const active=index===heroCenterIndex;dot.classList.toggle('active',active);dot.setAttribute('aria-current',active?'true':'false')})}
+    function shiftHero(){if(heroMoving)return;heroMoving=true;carousel.classList.add('is-sliding');setTimeout(()=>{const left=heroPanels.find(panel=>panel.classList.contains('role-left')),center=heroPanels.find(panel=>panel.classList.contains('role-center')),right=heroPanels.find(panel=>panel.classList.contains('role-right')),stash=heroPanels.find(panel=>panel.classList.contains('role-stash'));carousel.classList.add('no-motion');left.className='hero-panel role-stash';center.className='hero-panel role-left';right.className='hero-panel role-center';stash.className='hero-panel role-right';heroCenterIndex=(heroCenterIndex+1)%heroItems.length;const nextItem=heroItems[(heroCenterIndex+2)%heroItems.length];left.dataset.template=nextItem.template;left.querySelector('img').src=nextItem.src;carousel.classList.remove('is-sliding');updateHeroMeta();requestAnimationFrame(()=>{carousel.classList.remove('no-motion');heroMoving=false})},700)}
+    heroDots.forEach((dot,index)=>dot.addEventListener('click',()=>{if(index===heroCenterIndex||heroMoving)return;shiftHero()}));
+    updateHeroMeta();
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(shiftHero,5000);
+  </script>
+  <script>
+    (()=>{
+      const sections=document.querySelector('#sections');
+      const read=()=>{try{return JSON.parse(localStorage.getItem('maxai-published-works')||'[]')}catch(error){return []}};
+      function draw(mode){
+        sections.querySelector('.published-section')?.remove();
+        const works=read().filter(work=>work.type===mode).slice(0,6);if(!works.length)return;
+        const cards=works.map(work=>`<a class="template-card" href="../template-detail-v1/template-detail-v1.html?published=${encodeURIComponent(work.id)}" style="background-image:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.64)),url('${work.asset}');background-size:cover;background-position:center"><span style="position:absolute;z-index:2;top:7px;left:7px;padding:3px 5px;border-radius:4px;background:rgba(255,255,255,.88);color:#ff7201;font-size:9px">${work.category}</span><span>${work.title}</span></a>`).join('');
+        sections.insertAdjacentHTML('beforeend',`<section class="section published-section"><div class="section-heading"><h2 class="section-title">我的发布</h2><a class="more" href="../templates-v1/templates-v1.html">查看更多</a></div><div class="template-grid">${cards}</div></section>`);
+      }
+      const currentMode=()=>document.querySelector('.template-tags .tag.active')?.dataset.mode||'video';
+      draw(currentMode());
+      document.querySelectorAll('.template-tags .tag').forEach(button=>button.addEventListener('click',()=>setTimeout(()=>draw(currentMode()),0)));
+      window.addEventListener('storage',event=>{if(event.key==='maxai-published-works')draw(currentMode())});
+      document.addEventListener('visibilitychange',()=>{if(!document.hidden)draw(currentMode())});
+    })();
+  </script>
+</body>
+</html>
