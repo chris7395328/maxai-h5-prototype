@@ -121,5 +121,12 @@
       dialog.querySelector('[data-publish-confirm]').addEventListener('click',()=>{if(selectedCreationId)location.href=`../publish-v1/publish-v1.html?creation=${encodeURIComponent(selectedCreationId)}`});
     })();
   </script>
+  <script>
+    (()=>{
+      const renamePublish=()=>document.querySelectorAll('.publish-work').forEach(button=>button.textContent='发布模板');
+      new MutationObserver(renamePublish).observe(document.querySelector('#historyPane'),{childList:true,subtree:true});
+      renamePublish();
+    })();
+  </script>
 </body>
 </html>
