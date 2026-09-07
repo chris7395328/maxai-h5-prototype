@@ -96,7 +96,7 @@
       const app=document.querySelector('.app');
       const dialog=document.createElement('div');
       dialog.className='publish-confirm';
-      dialog.innerHTML='<section class="publish-confirm-card" role="dialog" aria-modal="true" aria-labelledby="publishTitle"><h2 id="publishTitle">分享为模板？</h2><p>发布后，其他创作者可查看并使用这份作品作为模板。你仍可在「我的 · 作品」中管理它。</p><div class="publish-confirm-actions"><button type="button" data-publish-cancel>取消</button><button type="button" class="confirm" data-publish-confirm>继续发布</button></div></section>';
+      dialog.innerHTML='<section class="publish-confirm-card" role="dialog" aria-modal="true" aria-labelledby="publishTitle"><h2 id="publishTitle">分享为模板？</h2><p>发布后，其他创作者可查看并使用这份作品作为模板。你仍可在「我的 · 我的模板」中管理它。</p><div class="publish-confirm-actions"><button type="button" data-publish-cancel>取消</button><button type="button" class="confirm" data-publish-confirm>继续发布</button></div></section>';
       app.append(dialog);
       let selectedCreationId='';
       const historyEntries=()=>{try{return JSON.parse(localStorage.getItem('maxai-creation-history')||'[]')}catch(error){return []}};
@@ -105,7 +105,7 @@
         [...historyPane.querySelectorAll('.creation-item.completed')].forEach(card=>{
           const entry=entries.find(item=>item.id===card.dataset.creationId);if(!entry||entry.origin!=='original')return;
           const time=card.querySelector('.creation-time');
-          if(time&&!time.querySelector('.publish-work'))time.insertAdjacentHTML('beforeend','<button class="publish-work" type="button">发布作品</button>');
+          if(time&&!time.querySelector('.publish-work'))time.insertAdjacentHTML('beforeend','<button class="publish-work" type="button">发布模板</button>');
         });
       }
       new MutationObserver(decorateHistory).observe(historyPane,{childList:true});
@@ -119,13 +119,6 @@
       dialog.querySelector('[data-publish-cancel]').addEventListener('click',()=>dialog.classList.remove('show'));
       dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.classList.remove('show')});
       dialog.querySelector('[data-publish-confirm]').addEventListener('click',()=>{if(selectedCreationId)location.href=`../publish-v1/publish-v1.html?creation=${encodeURIComponent(selectedCreationId)}`});
-    })();
-  </script>
-  <script>
-    (()=>{
-      const renamePublish=()=>document.querySelectorAll('.publish-work').forEach(button=>button.textContent='发布模板');
-      new MutationObserver(renamePublish).observe(document.querySelector('#historyPane'),{childList:true,subtree:true});
-      renamePublish();
     })();
   </script>
 </body>
