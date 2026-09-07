@@ -21,7 +21,7 @@
     /* 模板总览使用固定的 iPhone 17 页面分区，避免旧版自由高度与栅格互相挤压。 */
     html,body{height:100%;overflow:hidden}.app{width:min(100%,402px);height:874px;min-height:874px;display:flex;flex-direction:column;overflow:hidden}.top{height:calc(58px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 20px 0;grid-template-columns:30px 1fr 30px;flex:0 0 auto}.back{width:30px;height:30px}.back svg{width:17px;height:17px}.top h1{font-size:18px}.intro{flex:0 0 auto;padding:2px 20px 12px;font-size:12px}.tags{flex:0 0 auto;gap:8px;padding:0 20px 13px}.tag{height:32px;padding:0 14px;font-size:12px}.grid,.app>main.grid{width:100%;min-width:0;min-height:0;flex:1 1 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;align-content:start;gap:12px;padding:0 20px 24px;overflow-x:hidden;overflow-y:auto;scrollbar-width:none}.grid::-webkit-scrollbar{display:none}.template-card{display:block;width:100%;min-width:0;aspect-ratio:9/14}.template-card[hidden]{display:none}.card-name{right:10px;bottom:10px;left:10px;font-size:15px}.bottom-nav{position:relative;inset:auto;width:100%;height:calc(68px + env(safe-area-inset-bottom));padding:6px 16px calc(7px + env(safe-area-inset-bottom));flex:0 0 auto;transform:none}.empty{flex:1 1 auto;margin:0}
   </style>
-</head>
+<link rel="stylesheet" href="../../shared/mobile.css"><script src="../../shared/mobile.js" defer></script></head>
 <body>
   <div class="app">
     <header class="top"><button class="back" type="button" id="back" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.5 5-7 7 7 7"/></svg></button><h1>创意模板</h1><span></span></header>
