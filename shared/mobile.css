@@ -9,6 +9,7 @@ body .app > header, body .app > nav:not(.bottom-nav) { flex-shrink:0; }
 body .app > main:not(.app), .mobile-scroll { min-width:0; min-height:0; flex:1 1 auto; overflow-y:auto; overflow-x:hidden; overscroll-behavior-y:contain; -webkit-overflow-scrolling:touch; }
 body .app > .bottom-nav { position:relative; inset:auto; width:100%; height:var(--nav-height); min-height:var(--nav-height); flex:0 0 var(--nav-height); transform:none; margin:0; padding:6px max(16px, env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); box-sizing:border-box; }
 body .app > .bottom-nav .nav-link { min-width:0; }
+body .app > .bottom-nav { background:rgba(255,253,251,.94); border-top:1px solid #efdcd0; box-shadow:0 -8px 20px rgba(112,67,28,.07); }
 body .app > .backdrop { position:absolute; inset:0; width:100%; transform:none; }
 body .sheet { max-height:calc(var(--app-height) - 16px); max-height:min(81%, calc(var(--app-height) - 16px)); overscroll-behavior:contain; }
 body .share-sheet, body .asset-share-sheet, body .publish-confirm-card { max-height:calc(var(--app-height) - 24px); overflow-y:auto; }
