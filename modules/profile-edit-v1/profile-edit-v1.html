@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff9f3">
+  <title>MaxAi · 编辑资料</title>
+  <style>
+    :root{--orange:#ff7201;--cream:#fff9f3;--paper:#fffdfa;--ink:#161311;--line:#efddd0;--muted:#8f837a;--green:#2f9f66}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--cream);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif}
+    button,input{font:inherit}button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .app{position:relative;width:min(100%,402px);height:874px;margin:auto;display:flex;flex-direction:column;overflow:hidden;background:var(--cream)}
+    .top{height:calc(58px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 20px 0;display:grid;grid-template-columns:30px 1fr 30px;align-items:center;flex:0 0 auto}
+    .top h1{margin:0;text-align:center;font-size:17px;font-weight:650}.back{width:30px;height:30px;padding:0;display:grid;place-items:center;border:1px solid var(--line);border-radius:5px;background:rgba(255,255,255,.68);color:#685e57}.back svg{width:17px;height:17px}
+    .content{min-height:0;flex:1 1 auto;overflow-y:auto;padding:10px 20px 18px;scrollbar-width:none}.content::-webkit-scrollbar{display:none}
+    .avatar-head{display:flex;flex-direction:column;align-items:center;padding:6px 0 20px}.avatar-preview{width:82px;height:82px;display:grid;place-items:center;overflow:hidden;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #eed9c9,0 8px 20px rgba(94,53,21,.13)}.avatar-preview svg,.avatar-preview img{width:100%;height:100%;object-fit:cover}.choose-avatar{height:32px;margin-top:12px;padding:0 14px;display:inline-flex;align-items:center;gap:6px;border:1px solid #ffc693;border-radius:999px;background:#fff3e8;color:var(--orange);font-size:12px;font-weight:650}.choose-avatar svg{width:15px;height:15px}
+    .form-card{padding:0 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,253,251,.92);box-shadow:0 5px 16px rgba(95,58,27,.035)}.field{padding:15px 0}.field+.field{border-top:1px solid #f1e5dc}.field-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.field-label label{font-size:13px;font-weight:650}.field-label small{color:var(--muted);font-size:10px}.input{width:100%;height:44px;padding:0 12px;border:1px solid #e9ddd5;border-radius:7px;outline:none;background:#fff;color:var(--ink);font-size:16px}.input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,114,1,.1)}.google-input{position:relative}.google-input .google{position:absolute;top:50%;left:12px;width:20px;height:20px;transform:translateY(-50%)}.google-input .input{padding-left:42px;padding-right:72px}.linked{position:absolute;top:50%;right:11px;display:flex;align-items:center;gap:4px;transform:translateY(-50%);color:var(--green);font-size:10px}.linked i{width:6px;height:6px;border-radius:50%;background:currentColor}.hint{margin:8px 1px 0;color:var(--muted);font-size:10px;line-height:1.5}
+    .save-wrap{padding:10px 20px 12px;flex:0 0 auto}.save{width:100%;height:44px;border-radius:8px;background:var(--orange);color:#fff;font-size:15px;font-weight:700;box-shadow:0 8px 17px rgba(255,114,1,.2)}.save:active{transform:translateY(1px)}
+    .bottom-nav{height:calc(68px + env(safe-area-inset-bottom));padding:6px 16px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);flex:0 0 auto;align-items:center;justify-items:center;border-top:1px solid #efdcd0;background:rgba(255,253,251,.94);box-shadow:0 -8px 20px rgba(112,67,28,.07)}.nav-link{width:100%;min-height:51px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#8e847d;text-decoration:none;font-size:11px}.nav-link svg{width:27px;height:27px;overflow:visible}.nav-surface,.nav-glyph{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.nav-link.active{color:var(--orange);font-weight:600}.nav-link.active .nav-surface{fill:var(--orange);stroke:var(--orange)}.nav-link.active .nav-glyph{stroke:#fff}
+    .avatar-picker{position:absolute;z-index:50;inset:0;display:flex;flex-direction:column;background:var(--cream);transform:translateX(105%);visibility:hidden;transition:transform .26s ease,visibility 0s linear .26s}.avatar-picker.show{transform:translateX(0);visibility:visible;transition:transform .26s ease}.picker-top{height:calc(58px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 20px 0;display:grid;grid-template-columns:30px 1fr 30px;align-items:center;flex:0 0 auto}.picker-top h2{margin:0;text-align:center;font-size:17px}.picker-scroll{min-height:0;flex:1;overflow-y:auto;padding:10px 20px 20px;scrollbar-width:none}.picker-scroll::-webkit-scrollbar{display:none}.upload-row{width:100%;min-height:60px;padding:10px 12px;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--paper);text-align:left}.upload-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:9px;background:#fff0e4;color:var(--orange)}.upload-icon svg{width:20px;height:20px}.upload-copy{margin-left:11px}.upload-copy b{display:block;font-size:14px}.upload-copy small{display:block;margin-top:3px;color:var(--muted);font-size:10px}.upload-row>svg{width:16px;height:16px;margin-left:auto;color:#9b8f86}.picker-label{margin:20px 0 12px;font-size:14px;font-weight:650}.preset-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 13px}.preset-card{padding:0;background:none;color:var(--ink)}.preset-art{position:relative;width:82px;height:82px;margin:auto;overflow:hidden;border:3px solid var(--paper);border-radius:50%;box-shadow:0 0 0 1px #ead8ca}.preset-art svg,.preset-art img{display:block;width:100%;height:100%;object-fit:cover}.preset-card span{display:block;margin-top:6px;color:#746961;font-size:11px}.preset-card.selected .preset-art{border-color:var(--orange);box-shadow:0 0 0 3px #ffe6d1}.preset-card.selected .preset-art::after{content:"✓";position:absolute;right:1px;bottom:1px;width:21px;height:21px;display:grid;place-items:center;border:2px solid var(--cream);border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:800}.picker-action{padding:10px 20px calc(12px + env(safe-area-inset-bottom));flex:0 0 auto;background:linear-gradient(180deg,rgba(255,249,243,0),var(--cream) 20%)}.picker-confirm{width:100%;height:44px;border-radius:8px;background:var(--orange);color:#fff;font-size:15px;font-weight:700}.toast{position:absolute;z-index:70;left:50%;bottom:calc(138px + env(safe-area-inset-bottom));max-width:calc(100% - 40px);padding:9px 13px;transform:translate(-50%,12px);border-radius:999px;background:rgba(23,17,13,.86);color:#fff;font-size:12px;text-align:center;opacity:0;pointer-events:none;transition:.2s;white-space:nowrap}.toast.show{transform:translate(-50%,0);opacity:1}
+    .upload-row.selected{border-color:var(--orange);box-shadow:0 0 0 3px #ffe9d7}
+    @media(max-width:350px){.preset-grid{gap:13px 8px}.preset-art{width:74px;height:74px}}
+    @media(prefers-reduced-motion:reduce){.toast{transition:none}.save:active{transform:none}}
+  </style>
+  <link rel="stylesheet" href="../../shared/mobile.css">
+  <script src="../../shared/profile-avatars.js"></script>
+  <script src="../../shared/mobile.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <button class="back" id="back" aria-label="返回"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+      <h1>编辑资料</h1><span></span>
+    </header>
+    <main class="content">
+      <section class="avatar-head">
+        <div class="avatar-preview" id="avatarPreview" aria-label="当前头像">M</div>
+        <button class="choose-avatar" id="chooseAvatar" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3l1.3-2h7.4l1.3 2h3v10H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg>选择头像</button>
+      </section>
+      <section class="form-card">
+        <div class="field">
+          <div class="field-label"><label for="username">用户名</label><small><span id="nameCount">0</span>/24</small></div>
+          <input class="input" id="username" maxlength="24" autocomplete="nickname" placeholder="请输入用户名">
+        </div>
+        <div class="field">
+          <div class="field-label"><label for="googleAccount">关联 Google 账号</label><small>可更换</small></div>
+          <div class="google-input">
+            <svg class="google" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.58c2.09-1.93 3.27-4.77 3.27-8.09Z"/><path fill="#34A853" d="M12 23c2.99 0 5.49-.99 7.32-2.69l-3.58-2.77c-.99.66-2.26 1.06-3.74 1.06-2.88 0-5.32-1.95-6.19-4.57H2.12v2.84C3.94 20.48 7.66 23 12 23Z"/><path fill="#FBBC05" d="M5.81 14.04A6.55 6.55 0 0 1 5.46 12c0-.71.12-1.39.35-2.04V7.12H2.12A11 11 0 0 0 1 12c0 1.76.42 3.43 1.12 4.88l3.69-2.84Z"/><path fill="#EA4335" d="M12 5.38c1.63 0 3.09.56 4.24 1.66l3.18-3.18C17.49 2.06 14.99 1 12 1 7.66 1 3.94 3.52 2.12 7.12l3.69 2.84C6.68 7.34 9.12 5.38 12 5.38Z"/></svg>
+            <input class="input" id="googleAccount" type="email" autocomplete="email" inputmode="email" placeholder="name@gmail.com">
+            <span class="linked"><i></i>已关联</span>
+          </div>
+          <p class="hint">用于登录与账号同步。当前为交互原型，不会连接或修改真实 Google 账号。</p>
+        </div>
+      </section>
+    </main>
+    <div class="save-wrap"><button class="save" id="save" type="button">保存修改</button></div>
+    <section class="avatar-picker" id="avatarPicker" aria-label="选择头像" aria-hidden="true">
+      <header class="picker-top"><button class="back" id="pickerBack" aria-label="返回编辑资料"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><h2>选择头像</h2><span></span></header>
+      <div class="picker-scroll">
+        <button class="upload-row" id="uploadAvatar" type="button"><span class="upload-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3l1.3-2h7.4l1.3 2h3v10H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg></span><span class="upload-copy"><b>上传图片</b><small>支持 JPG、PNG，自动裁切为正方形</small></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+        <input id="avatarInput" type="file" accept="image/*" hidden>
+        <h3 class="picker-label">推荐头像</h3>
+        <div class="preset-grid" id="presetGrid"></div>
+      </div>
+      <div class="picker-action"><button class="picker-confirm" id="pickerConfirm" type="button">使用该头像</button></div>
+    </section>
+    <nav class="bottom-nav" aria-label="主导航">
+      <a class="nav-link" href="../home-v1/home-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="4.2" width="21" height="20" rx="6.3"/><path class="nav-glyph" d="M8.5 17.7v-7.1l5.5 4.5 5.5-4.5v7.1"/></svg><span>首页</span></a>
+      <a class="nav-link" href="../create-v1/create-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><path class="nav-glyph" d="M14 7.4c.55 3.8 2.35 5.6 6.2 6.2-3.85.6-5.65 2.4-6.2 6.2-.55-3.8-2.35-5.6-6.2-6.2 3.85-.6 5.65-2.4 6.2-6.2Z"/></svg><span>创作</span></a>
+      <a class="nav-link" href="../assets-v1/assets-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><path class="nav-glyph" d="M8.25 10.25h11.5v8H8.25zM10.2 10.25V8.8h4.95l1.4 1.45M11.1 13.1h5.8M11.1 15.55h3.5"/></svg><span>资产</span></a>
+      <a class="nav-link active" href="../mine-v1/mine-v1.html"><svg viewBox="0 0 28 28"><rect class="nav-surface" x="3.5" y="3.5" width="21" height="21" rx="7"/><circle class="nav-glyph" cx="14" cy="10" r="3.05"/><path class="nav-glyph" d="M8.35 20.05c.48-3.25 2.35-4.9 5.65-4.9s5.17 1.65 5.65 4.9"/></svg><span>我的</span></a>
+    </nav>
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script>
+    if(localStorage.getItem('maxai-auth')!=='1')location.replace('../login-v1/login-v1.html?return='+encodeURIComponent(location.href));
+    const defaults={username:'MaxAi 用户',googleAccount:'maxai.user@gmail.com',avatarType:'preset',avatarValue:'cat'};
+    let profile={...defaults},selectedType='preset',selectedValue='cat',draftType='preset',draftValue='cat';
+    try{profile={...defaults,...JSON.parse(localStorage.getItem('maxai-profile')||'{}')}}catch(error){}
+    selectedType=profile.avatarType==='upload'?'upload':'preset';selectedValue=selectedType==='upload'?profile.avatarValue:(MaxAiProfileAvatars.presets.some(item=>item.id===profile.avatarValue)?profile.avatarValue:'cat');
+    const username=document.querySelector('#username'),googleAccount=document.querySelector('#googleAccount'),preview=document.querySelector('#avatarPreview'),picker=document.querySelector('#avatarPicker'),upload=document.querySelector('#uploadAvatar'),toast=document.querySelector('#toast');
+    let toastTimer;
+    username.value=profile.username;googleAccount.value=profile.googleAccount;
+    function note(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),1600)}
+    function updateCount(){document.querySelector('#nameCount').textContent=[...username.value].length}
+    function renderAvatar(){MaxAiProfileAvatars.render(preview,selectedType,selectedValue,'当前头像')}
+    function buildPresets(){const grid=document.querySelector('#presetGrid');grid.replaceChildren(...MaxAiProfileAvatars.presets.map(item=>{const button=document.createElement('button');button.className='preset-card';button.type='button';button.dataset.preset=item.id;button.setAttribute('aria-label',item.name);const art=document.createElement('span');art.className='preset-art';art.style.background=item.bg;art.innerHTML=item.art;const label=document.createElement('span');label.textContent=item.name;button.append(art,label);button.addEventListener('click',()=>{draftType='preset';draftValue=item.id;renderPicker()});return button}))}
+    function renderPicker(){document.querySelectorAll('[data-preset]').forEach(button=>button.classList.toggle('selected',draftType==='preset'&&button.dataset.preset===draftValue));upload.classList.toggle('selected',draftType==='upload')}
+    function openPicker(){draftType=selectedType;draftValue=selectedValue;renderPicker();picker.classList.add('show');picker.setAttribute('aria-hidden','false')}
+    function closePicker(){picker.classList.remove('show');picker.setAttribute('aria-hidden','true')}
+    function resizeAvatar(file){
+      const reader=new FileReader();reader.onload=()=>{const image=new Image();image.onload=()=>{const side=Math.min(image.naturalWidth,image.naturalHeight),canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;canvas.getContext('2d').drawImage(image,(image.naturalWidth-side)/2,(image.naturalHeight-side)/2,side,side,0,0,512,512);draftType='upload';draftValue=canvas.toDataURL('image/jpeg',.86);renderPicker();note('图片已添加，请确认使用')};image.src=reader.result};reader.readAsDataURL(file)
+    }
+    document.querySelector('#chooseAvatar').addEventListener('click',openPicker);
+    document.querySelector('#pickerBack').addEventListener('click',closePicker);
+    document.querySelector('#pickerConfirm').addEventListener('click',()=>{selectedType=draftType;selectedValue=draftValue;renderAvatar();closePicker()});
+    upload.addEventListener('click',()=>document.querySelector('#avatarInput').click());
+    document.querySelector('#avatarInput').addEventListener('change',event=>{const file=event.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){note('请选择图片文件');return}resizeAvatar(file);event.target.value=''});
+    username.addEventListener('input',updateCount);
+    document.querySelector('#save').addEventListener('click',()=>{const name=username.value.trim(),email=googleAccount.value.trim();if(!name){note('请输入用户名');username.focus();return}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){note('请输入有效的 Google 邮箱');googleAccount.focus();return}localStorage.setItem('maxai-profile',JSON.stringify({username:name,googleAccount:email,avatarType:selectedType,avatarValue:selectedValue}));note('资料已保存');setTimeout(()=>location.href='../mine-v1/mine-v1.html',420)});
+    document.querySelector('#back').addEventListener('click',()=>history.length>1?history.back():location.href='../mine-v1/mine-v1.html');
+    buildPresets();updateCount();renderAvatar();
+  </script>
+</body>
+</html>
