@@ -60,7 +60,7 @@
     </nav>
   </div>
   <script>
-    if(localStorage.getItem('maxai-auth')!=='1'){location.replace('../login-v1/login-v1.html?return='+encodeURIComponent(location.href))}
+    const assetQuery=new URLSearchParams(location.search),trialAccess=assetQuery.get('trial')==='1'||localStorage.getItem('maxai-trial-access')==='1';if(localStorage.getItem('maxai-auth')!=='1'&&!trialAccess){location.replace('../login-v1/login-v1.html?return='+encodeURIComponent(location.href))}
     const assetLibrary=[{id:'perfume',name:'粉色香氛主图',src:'../home-v1/assets/hero-perfume-v1.png',type:'image'},{id:'serum',name:'焕亮精华主图',src:'../home-v1/assets/hero-serum-v1.png',type:'image'},{id:'sunglasses',name:'夏日眼镜主图',src:'../home-v1/assets/hero-sunglasses-v1.png',type:'image'},{id:'perfume-video',name:'香氛成片.mp4',src:'../home-v1/assets/hero-perfume-v1.png',type:'video'},{id:'serum-video',name:'精华展示.mp4',src:'../home-v1/assets/hero-serum-v1.png',type:'video'},{id:'brand-audio',name:'品牌配乐.mp3',src:'../home-v1/assets/hero-sunglasses-v1.png',type:'audio'}];
     const state={tab:new URLSearchParams(location.search).get('tab')==='library'?'library':'history',filter:'all'};
     const filters=document.querySelector('#filters'),historyPane=document.querySelector('#historyPane'),libraryPane=document.querySelector('#libraryPane');
