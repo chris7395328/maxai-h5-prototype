@@ -1153,6 +1153,8 @@ pointer-events:auto;
 /* Anchor the hint to the bell center instead of a fixed right offset. */
 .notification-entry.has-unread::after{right:auto;left:50%;transform:translateX(-50%)}.notification-entry.has-unread::before{right:auto;left:50%;margin-left:-4px}
 .notification-item.read{background:#fff}.notification-item.read .notification-dot{opacity:0}
+/* Persistent desktop support entry: three-times wider, with the label always visible. */
+.support-fab{width:132px;height:44px;padding:0 14px;justify-content:center;gap:8px}.support-fab span{position:static;display:inline;width:auto;padding:0;border-radius:0;background:transparent;color:inherit;font-size:12px}.support-fab:hover{padding:0 14px}
 </style>
 </head>
 <body>
