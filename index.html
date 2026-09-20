@@ -1,5 +1,22 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta http-equiv="refresh" content="0; url=modules/home-v1/home-v1.html"><title>MaxAi H5 Prototype</title></head>
-<body><p>Loading MaxAi H5 prototype...</p><script>location.replace('modules/home-v1/home-v1.html');</script></body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MaxAi Prototype</title>
+</head>
+<body>
+  <p>正在打开 MaxAi 原型...</p>
+  <noscript>
+    <p><a href="modules/home-v1/home-v1.html">打开 H5 原型</a> 或 <a href="web-v1/web-home-v2.html">打开 Web 原型</a></p>
+  </noscript>
+  <script>
+    (() => {
+      const ua = navigator.userAgent || '';
+      const isPhone = /iPhone|iPod|Windows Phone|Android.*Mobile|Mobile.*Firefox|Opera Mini|IEMobile/i.test(ua);
+      const target = isPhone ? 'modules/home-v1/home-v1.html' : 'web-v1/web-home-v2.html';
+      location.replace(target + location.search + location.hash);
+    })();
+  </script>
+</body>
 </html>
