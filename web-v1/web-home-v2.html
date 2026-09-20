@@ -1150,6 +1150,8 @@ pointer-events:auto;
 .notification-entry.has-unread::before,.notification-entry.has-unread::after{opacity:1;animation:none}
 /* Unread hint follows MaxAi's light surface: white bubble, orange message. */
 .notification-entry.has-unread::after{border:1px solid #f2cba9;background:#fff;color:#d45d04;box-shadow:0 8px 20px rgba(184,91,20,.13)}.notification-entry.has-unread::before{border-top:1px solid #f2cba9;border-left:1px solid #f2cba9;background:#fff}
+/* Anchor the hint to the bell center instead of a fixed right offset. */
+.notification-entry.has-unread::after{right:auto;left:50%;transform:translateX(-50%)}.notification-entry.has-unread::before{right:auto;left:50%;margin-left:-4px}
 </style>
 </head>
 <body>
@@ -1410,10 +1412,12 @@ pointer-events:auto;
       const savedLanguage=(()=>{try{return localStorage.getItem('maxai-web-language')||'zh'}catch{return'zh'}})();
       const setLanguage=language=>{const english=language==='en';languageEntry.textContent=english?'English':'中文';languageEntry.append(document.createTextNode(''));languageMenu.querySelectorAll('[data-language]').forEach(item=>item.classList.toggle('active',item.dataset.language===language));try{localStorage.setItem('maxai-web-language',language)}catch{}};
       setLanguage(savedLanguage);
-      languageEntry.onclick=event=>{event.stopPropagation();const opening=!languageMenu.classList.contains('show');closeHeadMenus();languageMenu.classList.toggle('show',opening);languageEntry.setAttribute('aria-expanded',String(opening))};
+      const placeHeadPopover=(menu,trigger)=>{const head=trigger.closest('.workspace-head'),headRect=head.getBoundingClientRect(),triggerRect=trigger.getBoundingClientRect();menu.style.top=`${triggerRect.bottom-headRect.top+8}px`;menu.style.left=`${triggerRect.right-headRect.left-menu.offsetWidth}px`;menu.style.right='auto'};
+      languageEntry.onclick=event=>{event.stopPropagation();const opening=!languageMenu.classList.contains('show');closeHeadMenus();languageMenu.classList.toggle('show',opening);languageEntry.setAttribute('aria-expanded',String(opening));if(opening)requestAnimationFrame(()=>placeHeadPopover(languageMenu,languageEntry))};
       languageMenu.onclick=event=>{const item=event.target.closest('[data-language]');if(!item)return;setLanguage(item.dataset.language);closeHeadMenus();say(item.dataset.language==='en'?'Language set to English':'已切换为中文')};
-      notificationEntry.onclick=event=>{event.stopPropagation();const opening=!notificationMenu.classList.contains('show');closeHeadMenus();notificationMenu.classList.toggle('show',opening);notificationEntry.setAttribute('aria-expanded',String(opening))};
+      notificationEntry.onclick=event=>{event.stopPropagation();const opening=!notificationMenu.classList.contains('show');closeHeadMenus();notificationMenu.classList.toggle('show',opening);notificationEntry.setAttribute('aria-expanded',String(opening));if(opening)requestAnimationFrame(()=>placeHeadPopover(notificationMenu,notificationEntry))};
       notificationMenu.onclick=event=>{const type=event.target.closest('[data-notification]')?.dataset.notification;if(!type)return;notificationEntry.classList.remove('has-unread');notificationMenu.querySelectorAll('.notification-dot').forEach(dot=>dot.remove());closeHeadMenus();if(type==='ticket')openTickets();else say(type==='template'?'已打开模板收藏提醒':'已查看新的关注提醒')};
+      window.addEventListener('resize',()=>{if(languageMenu.classList.contains('show'))placeHeadPopover(languageMenu,languageEntry);if(notificationMenu.classList.contains('show'))placeHeadPopover(notificationMenu,notificationEntry)});
       loginEntry.onclick=event=>{event.stopPropagation();if(!document.body.classList.contains('signed-in')){loginModal.classList.add('show');return}const opening=!accountMenu.classList.contains('show');closeHeadMenus();accountMenu.classList.toggle('show',opening);loginEntry.setAttribute('aria-expanded',String(opening))};
       accountMenu.onclick=event=>{const item=event.target.closest('[data-account-action]');if(!item)return;closeHeadMenus();if(item.dataset.accountAction==='profile')openProfile();if(item.dataset.accountAction==='subscription')subscriptionModal.classList.add('show');if(item.dataset.accountAction==='about')say('MaxAi · AI 电商创作平台');if(item.dataset.accountAction==='logout'){try{localStorage.removeItem('maxai-auth')}catch{}setSigned(false)}};
       let loginSlideIndex=0;const loginSlides=$$('.login-slide'),loginDots=$$('.login-dots i');const renderLoginSlide=next=>{loginSlideIndex=(next+loginSlides.length)%loginSlides.length;loginSlides.forEach((slide,index)=>slide.classList.toggle('active',index===loginSlideIndex));loginDots.forEach((dot,index)=>dot.classList.toggle('active',index===loginSlideIndex))};
