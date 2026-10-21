@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-20",
+  "mode": "built-in image_gen",
+  "purpose": "11 distinct new editorial images, each generated independently; no embedded text",
+  "images": [
+    {
+      "id": "campaign-hero-v2",
+      "output": "campaign-hero-v2.webp",
+      "original": "source-v2/campaign-hero-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Landscape 3:2. Sculptural summer campaign still life: pale sand leather sandals on travertine steps, a coral-orange reusable tumbler with condensation and a compact ivory portable speaker, sunlit apricot-and-off-white architectural studio. Elegant curved backdrop, long soft shadows, products clearly separated, premium ecommerce ad photography. Composition works cropped to near-square; keep subjects within central 80%. Avoid earbuds, skincare dropper bottles or sneakers."
+    },
+    {
+      "id": "video-citrus-v2",
+      "output": "video-citrus-v2.webp",
+      "original": "source-v2/video-citrus-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Hero product commercial for a plain tangerine-orange sparkling drink can with completely blank packaging, surrounded by a graceful splash of sparkling water, freshly cut mandarin wedges and one green leaf. Freeze motion high-speed photography with tiny droplets, sunlit pale peach studio, strong focal separation. Entire can visible, rich natural orange color, appetizing realistic freshness."
+    },
+    {
+      "id": "video-audio-v2",
+      "output": "video-audio-v2.webp",
+      "original": "source-v2/video-audio-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Cinematic commercial of elegant champagne-silver over-ear headphones floating just above a pale stone pedestal, one silk burnt-orange ribbon curves through the scene, soft blue-grey studio and precise diagonal daylight. Real anodized metal and woven ear cushions, serene high-end audio campaign. Whole headphones fit inside central 75%, no logos."
+    },
+    {
+      "id": "image-handbag-v2",
+      "output": "image-handbag-v2.webp",
+      "original": "source-v2/image-handbag-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Refined product fashion photograph: structured tan pebbled-leather handbag with sculptural handles on an ivory plinth beside dramatic arched cream architecture. Warm late afternoon light, subtle linen texture, crisp stitching and fine shadow details, airy high-end catalogue composition. No people and no jewelry hardware logos."
+    },
+    {
+      "id": "image-matcha-v2",
+      "output": "image-matcha-v2.webp",
+      "original": "source-v2/image-matcha-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Artisanal matcha product still life: beautiful jade-green glazed ceramic cup of matcha latte on a pale limestone table, a small tea tin with completely blank cream packaging, bamboo whisk, realistic silky foam and soft window shadows. Restrained sage and warm white palette, exceptionally tactile ceramic and stone, elegant contemporary ecommerce photography."
+    },
+    {
+      "id": "commerce-fashion-v2",
+      "output": "commerce-fashion-v2.webp",
+      "original": "source-v2/commerce-fashion-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Natural Indonesian modest-fashion campaign: adult Southeast Asian woman wearing a fine terracotta linen overshirt with cream trousers, carrying an unbranded woven canvas tote, standing in sunlit contemporary white courtyard with soft tropical plant shadows. Tasteful candid pose and believable hands, understated editorial ecommerce fashion. Mid-thigh to head framing, subject and tote centered."
+    },
+    {
+      "id": "commerce-suncare-v2",
+      "output": "commerce-suncare-v2.webp",
+      "original": "source-v2/commerce-suncare-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Portrait 2:3. Exquisite tropical sun-care ecommerce still life: two matte apricot sunscreen tubes with completely blank packaging, one closed one standing, fine pale sand, white hibiscus petals, a translucent curved glass block and gentle turquoise reflections. Bright yet soft seaside daylight, no dropper bottles, clean premium skincare commercial with all products fully visible."
+    },
+    {
+      "id": "brand-creator-v2",
+      "output": "brand-creator-v2.webp",
+      "original": "source-v2/brand-creator-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Landscape 3:2. Editorial image of an adult Indonesian female content creator in a bright minimal home studio preparing a product video. Three-quarter view, she is adjusting a compact camera on a small tripod while a handmade amber candle sits on the tabletop, warm oak desk, cream curtain and subtle green plant. Natural window lighting and relaxed competent expression. Genuine camera and hands, no computer display or visible screen UI, no printed text."
+    },
+    {
+      "id": "workflow-product-v2",
+      "output": "workflow-product-v2.webp",
+      "original": "source-v2/workflow-product-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Landscape 3:2. Clean premium catalogue input photograph: unbranded olive-green insulated stainless steel water bottle with elegant loop cap on a light grey tabletop, small neutral folded cotton towel nearby, softbox lighting, seamless pale grey background. Straight-on honest product detail, premium realistic powder-coated metal, simple crisp composition, no text or logos."
+    },
+    {
+      "id": "workflow-brief-v2",
+      "output": "workflow-brief-v2.webp",
+      "original": "source-v2/workflow-brief-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Landscape 3:2. Overhead editorial creative direction desk: blank white storyboard cards, sage and apricot paper color swatches, small terracotta ceramic object, a graphite pencil, folded linen sample and one citrus slice arranged in a thoughtful spacious composition on warm pale-grey desk. Photorealistic paper fibers, soft daylight, no drawings that resemble text, absolutely no lettering. Beautiful real tactile creative materials, not a computer mockup."
+    },
+    {
+      "id": "workflow-variations-v2",
+      "output": "workflow-variations-v2.webp",
+      "original": "source-v2/workflow-variations-v2.png",
+      "prompt": "Use case: ads-marketing. Generate ONE polished photorealistic ecommerce editorial image for the MAXADZ AI advertising features article. Real commercial photography, plausible physical materials, sophisticated lighting and restrained art direction. No readable text, letters, logos, watermark, badges or mock application interfaces. Crisp realistic details. This is a single finished scene, not a contact sheet. Landscape 3:2. Single premium tabletop product campaign exploring variations: three small identical cobalt-blue portable speakers arranged on three different low sculptural platforms, one white plaster, one pale peach acrylic, one light stone, with softly differentiated natural lighting across one continuous harmonious studio set. Real woven speaker mesh and tasteful compact design; no logos, screens, printed words or UI. Clear subject separation, professional commercial photography."
+    }
+  ]
+}
