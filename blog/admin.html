@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="robots" content="noindex,nofollow"><title>内容管理 | MaxAdz Blog</title>
+ <link rel="icon" href="../modules/home-v1/assets/maxai-logo.svg" type="image/svg+xml">
+ <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="vendor/jodit/jodit.min.css"><link rel="stylesheet" href="admin.css">
+ <script defer src="vendor/purify.min.js"></script><script defer src="vendor/jodit/jodit.min.js"></script><script defer src="vendor/jodit/zh_cn.js"></script>
+ <script defer src="seed.js"></script><script defer src="store.js"></script><script defer src="select-ui.js"></script><script defer src="admin.js"></script>
+</head>
+<body class="admin-body">
+ <a class="skip-link" href="#adminMain">跳至管理内容</a>
+ <div class="admin-layout">
+  <aside class="admin-sidebar">
+   <a class="brand" href="index.html"><img src="../modules/home-v1/assets/maxai-logo.svg" alt="" width="34" height="34"><span>MaxAdz</span></a>
+   <p class="workspace-name">博客内容管理</p>
+   <nav id="adminNav" aria-label="运营后台导航">
+    <a href="#overview" data-view="overview"><img class="icon" src="vendor/icons/layout-dashboard.svg" alt="">概览</a>
+    <a href="#posts" data-view="posts"><img class="icon" src="vendor/icons/article.svg" alt="">文章管理</a>
+    <a href="#media" data-view="media"><img class="icon" src="vendor/icons/photo.svg" alt="">媒体库</a>
+    <a href="#taxonomy" data-view="taxonomy"><img class="icon" src="vendor/icons/tags.svg" alt="">分类与标签</a>
+    <a href="#comments" data-view="comments"><img class="icon" src="vendor/icons/messages.svg" alt="">评论审核<span id="pendingBadge"></span></a>
+    <a href="#team" data-view="team"><img class="icon" src="vendor/icons/users.svg" alt="">团队成员</a>
+    <a href="#settings" data-view="settings"><img class="icon" src="vendor/icons/settings.svg" alt="">站点设置</a>
+   </nav>
+   <div class="sidebar-bottom"><a href="index.html" target="_blank" rel="noopener"><img class="icon" src="vendor/icons/external-link.svg" alt="">查看博客</a><small>本地原型工作区<br>数据保存在当前浏览器</small></div>
+  </aside>
+  <div class="admin-main">
+   <header class="admin-topbar"><div><a href="index.html">博客</a><span>/</span><span id="viewCrumb">概览</span></div><div class="admin-top-actions"><span class="prototype-label">本地演示</span><span class="operator-avatar">运</span><span>内容运营</span></div></header>
+   <main id="adminMain" tabindex="-1"><div class="admin-loading">正在读取本地内容…</div></main>
+  </div>
+ </div>
+ <dialog id="adminDialog" class="admin-dialog" aria-labelledby="dialogTitle"></dialog>
+ <div id="adminToast" class="admin-toast" role="status" aria-live="polite"></div>
+</body></html>
